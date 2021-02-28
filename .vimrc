@@ -33,6 +33,7 @@ colorscheme ron " set the color scheme to ron
 syntax on " turn syntax highlighting on
 set showmatch " highlight matching parentheses, brackets, and braces
 set belloff=all " disable all alert bell sounds
+setlocal spell spelllang=en " enable spell checking
 
 " --- Indentation Mechanics ---
 set autoindent " use indentation of previous line
