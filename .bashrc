@@ -152,6 +152,7 @@ alias c="clear"
 # alias to shorten and unshorten prompt
 alias shorten='shortened_termprompt'
 alias unshorten='default_termprompt'
+alias lengthen='default_termprompt'
 
 function shortened_termprompt() {
         PS1="${PS1//@\\h/}"     # Remove @host
@@ -169,15 +170,16 @@ alias freevpn1="sudo openvpn ~/openvpn/FreeVPN.me-OpenVPN-Bundle-July-2020/FreeV
 alias freevpn2="sudo openvpn ~/openvpn/FreeVPN.me-OpenVPN-Bundle-July-2020/FreeVPN.me\ -\ Server1-NL/Server1-UDP53.ovpn"
 alias freevpn3="sudo openvpn ~/openvpn/FreeVPN.me-OpenVPN-Bundle-July-2020/FreeVPN.me\ -\ Server1-NL/Server1-UDP40000.ovpn"
 
-# aliases for multirotor directories
-alias mmr="cd /mnt/d/OneDrive/Programming/Multirotor\ Robot\ Design\ Team/"
-alias iarc2020="cd /mnt/d/OneDrive/Programming/Multirotor\ Robot\ Design\ Team/IARC-2020/"
+# aliases for multirotor
+alias mmr="cd /mnt/e/OneDrive/Programming/Multirotor\ Robot\ Design\ Team/"
+alias iarc2020="cd /mnt/e/OneDrive/Programming/Multirotor\ Robot\ Design\ Team/IARC-2020/"
+alias cloneiarc="git clone https://github.com/MissouriMRR/IARC-2020 && cd IARC-2020 && pip install pre-commit && pre-commit install --hook-type pre-push"
 
 # environment variables for multirotor directories
-mmr="/mnt/d/OneDrive/Programming/Multirotor\ Robot\ Design\ Team/"
-iarc2020="/mnt/d/OneDrive/Programming/Multirotor\ Robot\ Design\ Team/IARC-2020/"
+mmr="/mnt/e/OneDrive/Programming/Multirotor\ Robot\ Design\ Team/"
+iarc2020="/mnt/e/OneDrive/Programming/Multirotor\ Robot\ Design\ Team/IARC-2020/"
 
 # aliases for personal directories
-alias classes="cd /mnt/d/OneDrive/Classes/"
-alias fs2020="cd /mnt/d/OneDrive/Classes/2020-21/FS2020/"
-alias FS2020="cd /mnt/d/OneDrive/Classes/2020-21/FS2020/"
+alias classes="cd /mnt/e/OneDrive/Classes/"
+alias sp2021="cd /mnt/e/OneDrive/Classes/2020-21/SP2021/"
+alias SP2021="cd /mnt/e/OneDrive/Classes/2020-21/SP2020/"
