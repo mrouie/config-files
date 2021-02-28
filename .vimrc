@@ -23,9 +23,9 @@ execute pathogen#infect()
 "
 "" --- Tab Mechanics ---
 " configure tab width and insert spaces instead of tabs
-:set tabstop=4 " tab width is 4 spaces
-:set shiftwidth=4 " indent also with 4 spaces
-:set expandtab " expand tabs to spaces
+set tabstop=4 " tab width is 4 spaces
+set shiftwidth=4 " indent also with 4 spaces
+set expandtab " expand tabs to spaces
 
 " --- Visuals and Sounds ---
 set number " enable line numbers
