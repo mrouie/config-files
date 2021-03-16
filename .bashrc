@@ -16,8 +16,8 @@ HISTCONTROL=ignoreboth
 shopt -s histappend
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=1000
-HISTFILESIZE=2000
+HISTSIZE=1000000
+HISTFILESIZE=2000000
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -126,11 +126,13 @@ alias motd="run-parts /etc/update-motd.d/"
 # show motd
 run-parts /etc/update-motd.d/
 
+# Set XDG_RUNTIME_DIR
+export XDG_RUNTIME_DIR="/tmp/runtime-mrouie"
+export RUNLEVEL=3
+
 # aliases for python
 alias python="python3"
 alias py="python3"
-
-# alias for pip
 alias pip="python3 -m pip"
 
 # aliases for wsl, cmd, and powershell
@@ -138,6 +140,15 @@ alias wsl="wsl.exe"
 alias cmd="cmd.exe"
 alias powershell="powershell.exe"
 alias pshell="powershell.exe"
+
+# aliases for explorer.exe
+alias explorer="explorer.exe"
+alias start="explorer.exe"
+
+# aliases for other applications
+alias notepad="notepad.exe"
+alias npp="/mnt/c/Program\ Files/Notepad++/notepad++.exe"
+
 
 # set DISPLAY environment variable for XLaunch
 export DISPLAY="`grep nameserver /etc/resolv.conf | sed 's/nameserver //'`:0"
@@ -148,17 +159,19 @@ alias ssh1="ssh UM-AD\\\mrnbq@rc22xcs213.managed.mst.edu"
 
 # alias to clear
 alias c="clear"
+alias cls="clear"
+alias cl="clear"
 
 # alias to shorten and unshorten prompt
 alias shorten='shortened_termprompt'
 alias unshorten='default_termprompt'
 alias lengthen='default_termprompt'
-
+#
 function shortened_termprompt() {
         PS1="${PS1//@\\h/}"     # Remove @host
         PS1="${PS1//\\w/\\W}"   # Change from full directory to last name
 }
-
+#
 function default_termprompt() {
     PS1="${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ "
 }
@@ -174,12 +187,18 @@ alias freevpn3="sudo openvpn ~/openvpn/FreeVPN.me-OpenVPN-Bundle-July-2020/FreeV
 alias mmr="cd /mnt/e/OneDrive/Programming/Multirotor\ Robot\ Design\ Team/"
 alias iarc2020="cd /mnt/e/OneDrive/Programming/Multirotor\ Robot\ Design\ Team/IARC-2020/"
 alias cloneiarc="git clone https://github.com/MissouriMRR/IARC-2020 && cd IARC-2020 && pip install pre-commit && pre-commit install --hook-type pre-push"
-
 # environment variables for multirotor directories
 mmr="/mnt/e/OneDrive/Programming/Multirotor\ Robot\ Design\ Team/"
 iarc2020="/mnt/e/OneDrive/Programming/Multirotor\ Robot\ Design\ Team/IARC-2020/"
 
 # aliases for personal directories
+alias winhome="cd /mnt/c/users/mrouie"
+alias desktop="cd /mnt/e/OneDrive/Desktop"
+alias onedrive="cd /mnt/e/OneDrive"
 alias classes="cd /mnt/e/OneDrive/Classes/"
 alias sp2021="cd /mnt/e/OneDrive/Classes/2020-21/SP2021/"
 alias SP2021="cd /mnt/e/OneDrive/Classes/2020-21/SP2020/"
+alias sp21="cd /mnt/e/OneDrive/Classes/2020-21/SP2021/"
+alias SP21="cd /mnt/e/OneDrive/Classes/2020-21/SP2021/"
+
+# END BASHRC
