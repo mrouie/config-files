@@ -150,8 +150,18 @@ alias notepad="notepad.exe"
 alias npp="/mnt/c/Program\ Files/Notepad++/notepad++.exe"
 
 
-# set DISPLAY environment variable for XLaunch
+# setup display container with XLaunch (VcXsrv)
+function init_vcxsrv() {
+        echo "Initializing display container..."
+        cmd.exe /C %USERPROFILE%\\config.xlaunch
+}
 export DISPLAY="`grep nameserver /etc/resolv.conf | sed 's/nameserver //'`:0"
+cmd.exe /C tasklist | grep -q "vcxsrv.exe" && echo "Display container already initialized." || init_vcxsrv # if not already running, init display container
+alias displayinit='init_vcxsrv'
+alias dispinit='init_vcxsrv'
+alias initdisplay='init_vcxsrv'
+alias initdisp='init_vcxsrv'
+
 
 # aliases for SSH profiles
 alias ssh0="ssh UM-AD\\\mrnbq@rc01xcs213.managed.mst.edu"
