@@ -142,8 +142,8 @@ alias powershell="powershell.exe"
 alias pshell="powershell.exe"
 
 # aliases for explorer.exe
-alias explorer="explorer.exe"
-alias start="explorer.exe"
+alias explorer="cmd.exe /C start"
+alias start="cmd.exe /C start"
 
 # aliases for other applications
 alias notepad="notepad.exe"
