@@ -4,6 +4,10 @@ alias python="python3"
 alias py="python3"
 alias pip="python3 -m pip"
 
+# aliases to create and activate a Python virtual environment
+alias ve='python3 -m venv ./venv'
+alias va='source ./venv/bin/activate'
+
 # aliases for wsl, cmd, and powershell
 alias wsl="wsl.exe"
 alias cmd="cmd.exe"
@@ -56,6 +60,16 @@ function get_all_filetypes() {
 alias c="clear"
 alias cls="clear"
 alias cl="clear"
+
+# alias for sending an item to the "trash" (instead of deleting)
+# alias tcn='mv --force -t ~/.local/share/Trash '
+# Alternatively use "trashy"
+# https://gitlab.com/trashy/trashy.git
+# If installed from git, uncomment alias below
+alias trash="trashy"
+
+# alias for a copy command w/ a progress bar
+alias cpv='rsync -ah --info=progress2'
 
 
 
