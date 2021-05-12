@@ -186,6 +186,14 @@ function default_termprompt() {
     PS1="${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ "
 }
 
+# alias for finding all distinct file types in current directory (recursively)
+alias types='get_all_filetypes'
+alias filetypes='get_all_filetypes'
+alias alltypes='get_all_filetypes'
+function get_all_filetypes() {
+    find . -type f | perl -ne 'print $1 if m/\.([^.\/]+)$/' | sort -u
+}
+
 # alias for vpn profiles
 alias mstvpn="sudo openvpn ~/openvpn/openvpn-mst-edu/openvpn-mst-edu.ovpn"
 alias freevpn0="sudo openvpn ~/openvpn/FreeVPN.me-OpenVPN-Bundle-July-2020/FreeVPN.me\ -\ Server1-NL/Server1-TCP80.ovpn"
