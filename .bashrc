@@ -97,27 +97,23 @@ alias motd="run-parts /etc/update-motd.d/"
 # show motd
 run-parts /etc/update-motd.d/
 
-# some more ls aliases
-alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CF'
 
-# Add an "alert" alias for long running commands.  Use like so:
+# Add an "alert" alias for long running commands. Use like so:
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
-# Alias definitions.
-# You may want to put all your additions into a separate file like
-# ~/.bash_aliases, instead of adding them here directly.
-# See /usr/share/doc/bash-doc/examples in the bash-doc package.
 
+## Alias definitions
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
-# enable programmable completion features (you don't need to enable
-# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
-# sources /etc/bash.bashrc).
+
+###############################################################################
+###                 Enable programmable completion features                 ###
+###############################################################################
+# (you don't need to enable this, if it's already enabled in /etc/bash.bashrc 
+# and /etc/profile sources /etc/bash.bashrc).
 if ! shopt -oq posix; then
   if [ -f /usr/share/bash-completion/bash_completion ]; then
     . /usr/share/bash-completion/bash_completion
@@ -125,26 +121,48 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
+###############################################################################
 
 
-# Set XDG_RUNTIME_DIR
+## Set XDG_RUNTIME_DIR
 export XDG_RUNTIME_DIR="/tmp/runtime-mrouie"
 export RUNLEVEL=3
 
 
-# setup display container with XLaunch (VcXsrv)
+###############################################################################
+###          Setup (WSL2) Display Container Using XLaunch (VcXsrv)          ###
+###############################################################################
 function init_vcxsrv() {
         echo "Initializing display container..."
         cmd.exe /C %USERPROFILE%\\config.xlaunch
 }
-export DISPLAY="`grep nameserver /etc/resolv.conf | sed 's/nameserver //'`:0"
-cmd.exe /C tasklist | grep -q "vcxsrv.exe" && echo "Display container already initialized." || init_vcxsrv # if not already running, init display container
+# Option 1:
+#export DISPLAY="`grep nameserver /etc/resolv.conf | sed 's/nameserver //'`:0"
 
-## Aliases for initializing display container ##
+# Option 2:
+#export DISPLAY=$(awk '/nameserver / {print $2; exit}' /etc/resolv.conf 2>/dev/null):0
+#export LIBGL_ALWAYS_INDIRECT=1
+
+# Option 3:
+#export DISPLAY="`sed -n 's/nameserver //p' /etc/resolv.conf`:0"
+
+#Option 4:
+export DISPLAY=$(ip route|awk '/^default/{print $3}'):0.0
+
+# Execute initialization of display container process if not already initialized
+cmd.exe /C tasklist | grep -q "vcxsrv.exe" &&
+    echo "Display container already initialized." || init_vcxsrv
+
+## Aliases for initializing display container
 alias displayinit='init_vcxsrv'
 alias dispinit='init_vcxsrv'
 alias initdisplay='init_vcxsrv'
 alias initdisp='init_vcxsrv'
 
+## Aliases for killing the display container
+alias killdisplay='cmd.exe /C taskkill /f /im VcxSrv.exe'
+alias killdisp='cmd.exe /C taskkill /f /im VcxSrv.exe'
 
-# END BASHRC
+###############################################################################
+
+# END BASHRC #
