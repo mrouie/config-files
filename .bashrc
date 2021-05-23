@@ -43,7 +43,7 @@ esac
 # uncomment for a colored prompt, if the terminal has the capability; turned
 # off by default to not distract the user: the focus in a terminal window
 # should be on the output of commands, not on the prompt
-#force_color_prompt=yes
+force_color_prompt=yes
 
 if [ -n "$force_color_prompt" ]; then
     if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
@@ -110,6 +110,28 @@ fi
 
 
 ###############################################################################
+###                         Supplementary Git Setup                         ###
+###############################################################################
+## Ensure that ~/git-prompt.sh and ~/git-completion.bash exist
+if ! (test -f "~/git-prompt.sh"); then
+    wget -q https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh -P ~/ -O git-prompt.sh
+    rm ~/.wget-hsts # remove wget generated file
+fi
+if ! (test -f "~/git-completion.bash"); then
+    wget -q https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -P ~/ -O git-completion.bash
+    rm ~/.wget-hsts # remove wget generated file
+fi
+# Always update git prompt and git completion files
+#wget -q https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -P ~/ -O git-completion.bash
+#wget -q https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh -P ~/ -O git-prompt.sh
+
+## Load git prompt and git completion files
+. ~/git-completion.bash # load git-completion.bash (file from git source code)
+. ~/git-prompt.sh # load git-prompt.sh (file from git source code)
+#export GIT_PS1_SHOWDIRTYSTATE=1
+#export PS1='\w$(__git_ps1 " (%s)")\$ '
+
+###############################################################################
 ###                 Enable programmable completion features                 ###
 ###############################################################################
 # (you don't need to enable this, if it's already enabled in /etc/bash.bashrc 
@@ -134,7 +156,9 @@ export RUNLEVEL=3
 ###############################################################################
 function init_vcxsrv() {
         echo "Initializing display container..."
-        cmd.exe /C %USERPROFILE%\\config.xlaunch
+        cmd.exe /C %USERPROFILE%\\config.xlaunch && 
+            echo "Display container initialized." ||
+            echo "ERROR: Unable to initialize display container."
 }
 # Option 1:
 #export DISPLAY="`grep nameserver /etc/resolv.conf | sed 's/nameserver //'`:0"
@@ -164,5 +188,6 @@ alias killdisplay='cmd.exe /C taskkill /f /im VcxSrv.exe'
 alias killdisp='cmd.exe /C taskkill /f /im VcxSrv.exe'
 
 ###############################################################################
+
 
 # END BASHRC #
