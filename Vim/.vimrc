@@ -1,4 +1,4 @@
-" mrouie's vi config file
+" mrouie's vim config file
 
 " --- Plugins ---
 " install pathogen:
@@ -10,15 +10,15 @@ execute pathogen#infect()
 
 " Some good plugins out there:
 " (Pathogen) install auto-pairs:
-"   git clone git://github.com/jiangmiao/auto-pairs.git ~/.vim/bundle/auto-pairs
+"   git clone https://github.com/jiangmiao/auto-pairs.git ~/.vim/bundle/auto-pairs
 " (Pathogen) install ale:
-"   git clone git://github.com/dense-analysis/ale.git ~/.vim/bundle/ale
+"   git clone https://github.com/dense-analysis/ale.git ~/.vim/bundle/ale
 " (Pathogen) install The NERDTree:
-"   git clone git://github.com/preservim/nerdtree.git ~/.vim/bundle/nerdtree
+"   git clone https://github.com/preservim/nerdtree.git ~/.vim/bundle/nerdtree
 " (Pathogen) install fugitive:
-"   git clone git://github.com/tpope/vim-fugitive.git ~/.vim/bundle/vim-fugitive
+"   git clone https://github.com/tpope/vim-fugitive.git ~/.vim/bundle/vim-fugitive
 " (Pathogen) install vim-gitgutter:
-"   git clone git://github.com/airblade/vim-gitgutter.git ~/.vim/bundle/vim-gitgutter.git
+"   git clone https://github.com/airblade/vim-gitgutter.git ~/.vim/bundle/vim-gitgutter.git
 "
 "
 "" --- Tab Mechanics ---
