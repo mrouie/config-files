@@ -1,4 +1,18 @@
-## Application Aliases ##
+## Bash Aliases ##
+# some ls aliases
+alias ll='ls -alhF'
+alias la='ls -AF'
+alias l='ls -CF'
+
+
+## Application Aliasies ##
+
+# aliases for git
+alias ga="git add"
+alias gs="git status"
+alias gc="git commit"
+alias gb="git branch"
+
 # aliases for python
 alias python="python3"
 alias py="python3"
@@ -7,6 +21,8 @@ alias pip="python3 -m pip"
 # aliases to create and activate a Python virtual environment
 alias ve='python3 -m venv ./venv'
 alias va='source ./venv/bin/activate'
+alias vd='deactivate'
+alias da='vd'
 
 # aliases for wsl, cmd, and powershell
 alias wsl="wsl.exe"
@@ -15,8 +31,8 @@ alias powershell="powershell.exe"
 alias pshell="powershell.exe"
 
 # aliases for explorer.exe
-alias explorer="cmd.exe /C start"
-alias start="cmd.exe /C start"
+alias explorer="explorer.exe"
+alias start="explorer.exe"
 
 # aliases for other applications
 alias notepad="notepad.exe"
@@ -36,10 +52,7 @@ alias freevpn3="sudo openvpn ~/openvpn/FreeVPN.me-OpenVPN-Bundle-July-2020/FreeV
 
 
 ## Utilities ##
-# alias to shorten and unshorten prompt
-alias shorten='shorten_termprompt'
-alias unshorten='default_termprompt'
-alias lengthen='default_termprompt'
+# shorten and unshorten terminal prompt
 function shorten_termprompt() {
         PS1="${PS1//@\\h/}"     # Remove @host
         PS1="${PS1//\\w/\\W}"   # Change from full directory to last name
@@ -47,8 +60,15 @@ function shorten_termprompt() {
 function default_termprompt() {
     PS1="${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ "
 }
+alias shorten='shorten_termprompt'
+alias unshorten='default_termprompt'
+alias lengthen='default_termprompt'
+alias defaultprompt='default_termprompt'
+alias termprompt='default_termprompt'
+alias prompt='echo $PS1'
 
 # alias for finding all distinct file types in current directory (recursively)
+alias listtypes='get_all_filetypes'
 alias types='get_all_filetypes'
 alias filetypes='get_all_filetypes'
 alias alltypes='get_all_filetypes'
@@ -66,7 +86,7 @@ alias cl="clear"
 # Alternatively use "trashy"
 # https://gitlab.com/trashy/trashy.git
 # If installed from git, uncomment alias below
-alias trash="trashy"
+#alias trash="trashy"
 
 # alias for a copy command w/ a progress bar
 alias cpv='rsync -ah --info=progress2'
@@ -75,8 +95,9 @@ alias cpv='rsync -ah --info=progress2'
 
 ## Directories ##
 # aliases for multirotor directories
-alias mmr="cd /mnt/e/OneDrive/Programming/Multirotor\ Robot\ Design\ Team/"
-alias iarc2020="cd /mnt/e/OneDrive/Programming/Multirotor\ Robot\ Design\ Team/IARC-2020/"
+alias mrr="cd /mnt/e/OneDrive/Programming/Multirotor\ Robot\ Design\ Team/"
+# alias iarc2020="cd /mnt/e/OneDrive/Programming/Multirotor\ Robot\ Design\ Team/IARC-2020/"
+alias suas2022="cd /mnt/e/OneDrive/Programming/Multirotor\ Robot\ Design\ Team/SUAS\ 2022/SUAS-2022"
 alias cloneiarc="git clone https://github.com/MissouriMRR/IARC-2020 && cd IARC-2020 && pip install pre-commit && pre-commit install --hook-type pre-push"
 # environment variables for multirotor directories
 mmr="/mnt/e/OneDrive/Programming/Multirotor\ Robot\ Design\ Team/"

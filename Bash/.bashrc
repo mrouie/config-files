@@ -113,12 +113,12 @@ fi
 ###                         Supplementary Git Setup                         ###
 ###############################################################################
 ## Ensure that ~/git-prompt.sh and ~/git-completion.bash exist
-if ! (test -f "~/git-prompt.sh"); then
-    wget -q https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh -P ~/ -O git-prompt.sh
+if ! (test -f ~/git-prompt.sh); then
+    wget -q https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh -P ~/ -O ~/git-prompt.sh
     rm ~/.wget-hsts # remove wget generated file
 fi
-if ! (test -f "~/git-completion.bash"); then
-    wget -q https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -P ~/ -O git-completion.bash
+if ! (test -f ~/git-completion.bash); then
+    wget -q https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -P ~/ -O ~/git-completion.bash
     rm ~/.wget-hsts # remove wget generated file
 fi
 # Always update git prompt and git completion files
@@ -186,6 +186,10 @@ alias initdisp='init_vcxsrv'
 ## Aliases for killing the display container
 alias killdisplay='cmd.exe /C taskkill /f /im VcxSrv.exe'
 alias killdisp='cmd.exe /C taskkill /f /im VcxSrv.exe'
+
+## Alias for combining the killing of the display container and ending the VM
+alias quit='killdisp; wsl -t Ubuntu\-20.04'
+alias q='quit'
 
 ###############################################################################
 
