@@ -14,9 +14,9 @@ alias gc="git commit"
 alias gb="git branch"
 
 # aliases for python
-alias python="python3"
-alias py="python3"
-alias pip="python3 -m pip"
+#alias python="python3"
+#alias py="python3"
+#alias pip="python3 -m pip"
 
 # aliases to create and activate a Python virtual environment
 alias ve='python3 -m venv ./venv'

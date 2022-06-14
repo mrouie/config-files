@@ -113,21 +113,21 @@ fi
 ###                         Supplementary Git Setup                         ###
 ###############################################################################
 ## Ensure that ~/git-prompt.sh and ~/git-completion.bash exist
-if ! (test -f ~/git-prompt.sh); then
-    wget -q https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh -P ~/ -O ~/git-prompt.sh
-    rm ~/.wget-hsts # remove wget generated file
-fi
-if ! (test -f ~/git-completion.bash); then
-    wget -q https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -P ~/ -O ~/git-completion.bash
-    rm ~/.wget-hsts # remove wget generated file
-fi
+#if ! (test -f ~/git-prompt.sh); then
+#    wget -q https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh -P ~/ -O ~/git-prompt.sh
+#    rm ~/.wget-hsts # remove wget generated file
+#fi
+#if ! (test -f ~/git-completion.bash); then
+#    wget -q https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -P ~/ -O ~/git-completion.bash
+#    rm ~/.wget-hsts # remove wget generated file
+#fi
 # Always update git prompt and git completion files
 #wget -q https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -P ~/ -O git-completion.bash
 #wget -q https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh -P ~/ -O git-prompt.sh
 
 ## Load git prompt and git completion files
-. ~/git-completion.bash # load git-completion.bash (file from git source code)
-. ~/git-prompt.sh # load git-prompt.sh (file from git source code)
+#. ~/git-completion.bash # load git-completion.bash (file from git source code)
+#. ~/git-prompt.sh # load git-prompt.sh (file from git source code)
 #export GIT_PS1_SHOWDIRTYSTATE=1
 #export PS1='\w$(__git_ps1 " (%s)")\$ '
 
@@ -188,7 +188,15 @@ alias killdisplay='cmd.exe /C taskkill /f /im VcxSrv.exe'
 alias killdisp='cmd.exe /C taskkill /f /im VcxSrv.exe'
 
 ## Alias for combining the killing of the display container and ending the VM
-alias quit='killdisp; wsl -t Ubuntu\-20.04'
+function quit() {
+    if (($(wsl.exe -l --running | wc -l) <= 2)); then
+        killdisp;
+    else
+        echo "Other WSL distros still open...";
+        echo "Display server still running.";
+    fi
+    wsl.exe -t $WSL_DISTRO_NAME
+}
 alias q='quit'
 
 ###############################################################################
