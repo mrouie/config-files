@@ -76,8 +76,8 @@ esac
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
     alias ls='ls --color=auto'
-    #alias dir='dir --color=auto'
-    #alias vdir='vdir --color=auto'
+    alias dir='dir --color=auto'
+    alias vdir='vdir --color=auto'
 
     alias grep='grep --color=auto'
     alias fgrep='fgrep --color=auto'
@@ -85,18 +85,12 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 # colored GCC warnings and errors
-#export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
-
-# alias to show motd
-alias motd="run-parts /etc/update-motd.d/"
-
-#function  showMotd() {
-#    for i in /etc/update-motd.d/*; do if [ "$i" != "/etc/update-motd.d/98-fsck-at-reboot" ]; then $i; fi; done
-#}
+export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
 # show motd
-run-parts /etc/update-motd.d/
-
+if [ -d /etc/update-motd.d ]; then
+    run-parts /etc/update-motd.d/
+fi
 
 # Add an "alert" alias for long running commands. Use like so:
 #   sleep 10; alert
@@ -108,28 +102,6 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
-
-###############################################################################
-###                         Supplementary Git Setup                         ###
-###############################################################################
-## Ensure that ~/git-prompt.sh and ~/git-completion.bash exist
-#if ! (test -f ~/git-prompt.sh); then
-#    wget -q https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh -P ~/ -O ~/git-prompt.sh
-#    rm ~/.wget-hsts # remove wget generated file
-#fi
-#if ! (test -f ~/git-completion.bash); then
-#    wget -q https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -P ~/ -O ~/git-completion.bash
-#    rm ~/.wget-hsts # remove wget generated file
-#fi
-# Always update git prompt and git completion files
-#wget -q https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -P ~/ -O git-completion.bash
-#wget -q https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh -P ~/ -O git-prompt.sh
-
-## Load git prompt and git completion files
-#. ~/git-completion.bash # load git-completion.bash (file from git source code)
-#. ~/git-prompt.sh # load git-prompt.sh (file from git source code)
-#export GIT_PS1_SHOWDIRTYSTATE=1
-#export PS1='\w$(__git_ps1 " (%s)")\$ '
 
 ###############################################################################
 ###                 Enable programmable completion features                 ###
@@ -150,53 +122,6 @@ fi
 export XDG_RUNTIME_DIR="/tmp/runtime-mrouie"
 export RUNLEVEL=3
 
-
-###############################################################################
-###          Setup (WSL2) Display Container Using XLaunch (VcXsrv)          ###
-###############################################################################
-function init_vcxsrv() {
-        echo "Initializing display container..."
-        cmd.exe /C %USERPROFILE%\\config.xlaunch && 
-            echo "Display container initialized." ||
-            echo "ERROR: Unable to initialize display container."
-}
-# Option 1:
-#export DISPLAY="`grep nameserver /etc/resolv.conf | sed 's/nameserver //'`:0"
-
-# Option 2:
-#export DISPLAY=$(awk '/nameserver / {print $2; exit}' /etc/resolv.conf 2>/dev/null):0
-#export LIBGL_ALWAYS_INDIRECT=1
-
-# Option 3:
-#export DISPLAY="`sed -n 's/nameserver //p' /etc/resolv.conf`:0"
-
-#Option 4:
-export DISPLAY=$(ip route|awk '/^default/{print $3}'):0.0
-
-# Execute initialization of display container process if not already initialized
-cmd.exe /C tasklist | grep -q "vcxsrv.exe" &&
-    echo "Display container already initialized." || init_vcxsrv
-
-## Aliases for initializing display container
-alias displayinit='init_vcxsrv'
-alias dispinit='init_vcxsrv'
-alias initdisplay='init_vcxsrv'
-alias initdisp='init_vcxsrv'
-
-## Aliases for killing the display container
-alias killdisplay='cmd.exe /C taskkill /f /im VcxSrv.exe'
-alias killdisp='cmd.exe /C taskkill /f /im VcxSrv.exe'
-
-## Alias for combining the killing of the display container and ending the VM
-function quit() {
-    if (($(wsl.exe -l --running | wc -l) <= 2)); then
-        killdisp;
-    else
-        echo "Other WSL distros still open...";
-        echo "Display server still running.";
-    fi
-    wsl.exe -t $WSL_DISTRO_NAME
-}
 alias q='quit'
 
 ###############################################################################
